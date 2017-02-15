@@ -49,11 +49,13 @@
     var self = this;
 
     this.currentUrl = undefined;
+    //create web worker on QRCodeManager object
     this.imageWorker = new Worker("./scripts/jsqrcode/qrworker.js");
 
 
     this.detectQRCode = function(imageData, callback) {
       callback = callback || function() {};
+      //offload decoding job to background image
       self.imageWorker.postMessage(imageData);
       self.imageWorker.onmessage = function(e){
         var url = e.data;
