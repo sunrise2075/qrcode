@@ -55,7 +55,7 @@
 
     this.detectQRCode = function(imageData, callback) {
       callback = callback || function() {};
-      //offload decoding job to background image
+      //offload decoding job to background web worker
       self.imageWorker.postMessage(imageData);
       self.imageWorker.onmessage = function(e){
         var url = e.data;
